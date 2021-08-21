@@ -73,9 +73,11 @@ sha_url https://github.com/yatharth/wolframalpha-cli/archive/refs/tags/{version}
 
 ---
 
-Then update the following fields in formula file in the `yatharth/misc` tap:
+Then update the following fields in formula file in the [`yatharth/misc`][tap] tap:
 
 - `version`
 - `url`
 - `sha256`
 
+
+[tap]: https://github.com/yatharth/homebrew-misc
