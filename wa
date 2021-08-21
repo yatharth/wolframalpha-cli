@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+#
+# originally authored by by Sairon Istyar, 2012
+# original source stored at https://github.com/saironiq/shellscripts/blob/master/wolframalpha_com/wa.sh
+#
+# original source found on https://perso.crans.org/besson/wolfram.en.html
+# then downloaded from https://bitbucket.org/lbesson/bin/src/master/wa.sh
+#
+# edited by Yatharth Agarwal, 2021
+# stored at https://github.com/yatharth/wolframlpha-cli/blob/master/wa.sh
+#
+# distributed under the GPLv3 license
+# http://www.opensource.org/licenses/gpl-3.0.html
+#
+
+# Read API key from saved file if exists.
+[ -f ~/.wolfram_api_key ] && . ~/.wolfram_api_key
+
+# Function to ask user for API key and save it.
+prompt_user_for_api_key() {
+	echo "You need a valid WolframAlpha API key to use this tool."
+	echo "Get one at https://developer.wolframalpha.com/portal/apisignup.html"
+	echo
+	echo -n "Enter your API key: "
+	read api_key
+	echo "API_KEY=${api_key}" >> ~/.wolfram_api_key
+	echo
+	echo "Your API key has been saved to ~/.wolfram_api_key"
+	echo "Now, rerun the tool."
+	exit 1
+}
+
+# Make sure API_KEY is defined.
+if [ -z "$API_KEY" ] ; then
+	echo "No API key was found."
+	prompt_user_for_api_key
+fi
+
+# Properly encode query.
+q=$(echo ${*} | sed 's/+/%2B/g' | tr '\ ' '\+')
+
+# Call WolframAlpha API.
+result=$(curl -s "http://api.wolframalpha.com/v2/query?input=${q}&appid=${API_KEY}&format=plaintext")
+
+# Catch error where whether API_KEY was invalid.
+if [ -n "$(echo ${result} | grep 'Invalid appid')" ] ; then
+	echo "Invalid API key!"
+	prompt_user_for_api_key
+fi
+
+# Clean result to print in plaintext.
+result=`echo "${result}" \
+	| tr '\n' '\t' \
+	| sed -e 's/<plaintext>/\'$'\n<plaintext>/g' \
+	| grep -oE "<plaintext>.*</plaintext>|<pod title=.[^\']*" \
+	| sed -e 's!<plaintext>!!g; \
+		s!</plaintext>!!g; \
+		s!<pod title=.*!\\\x1b[1;36m&\\\x1b[0m!g; \
+		s!<pod title=.!!g; \
+		s!\&amp;!\&!g; \
+		s!\&lt;!<!g; \
+		s!\&gt;!>!g; \
+		s!\&quot;!"!g' \
+		-e "s/\&apos;/'/g" \
+	| tr '\t' '\n' \
+	| sed  '/^$/d; \
+		s/\ \ */\ /g; \
+		s/\\\:/\\\u/g'`
+
+# Print result.
+echo -e "${result}"
