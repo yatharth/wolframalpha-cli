@@ -27,7 +27,11 @@ The different URL is because `curl` doesn’t follow the redirects Github sends 
 
 Just run:
 
-    wa "{your query here}"`
+    wa "{your query here}"
+
+For example:
+
+	wa "2pm California to Brasil"
 
 You don’t need the quotes. You can also do:
 
@@ -43,11 +47,15 @@ To update, run:
     git tag {version}
     git push origin {version}
 
-This will create a new “release” on GitHub for the tag, which contains gzipped tarballs and zips of the repository.
+GitHub will create a new “release” for the tag, including a zip file and a gzipped tarball of the repo.
+
+We’ll need the URL of the tarball. It’ll be something like:
+
+    https://github.com/yatharth/wolframalpha-cli/archive/refs/tags/{version}.tar.gz
 
 ---
 
-The URL of this tarball will be used in the Homebrew formula file. We’ll also need to SHA hash.
+We’ll also need the SHA hash of the tarball.
 
 To get that, run any one of the following:
 
