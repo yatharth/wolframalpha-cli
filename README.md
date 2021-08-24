@@ -49,9 +49,9 @@ For example:
 On its first run, it will ask you for a WolframAlpha API key and point you to a URL where you can get one.
 
 
-## Dev Notes
+## Developer Notes
 
-To update, run:
+To update the Homebrew formula, run:
 
     git tag {version}
     git push origin {version}
