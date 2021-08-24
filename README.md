@@ -41,12 +41,10 @@ Just run:
 
 For example:
 
-    wa "2pm California to Brasil"
-    wa "time in Alberta"
-    wa 10th to 20th Fibonacci numbers
-    wa days from May 15 to July 30
-
-<!-- Quotemarks are optional. -->
+    wa 2pm California to Brasil
+    wa time in Alberta
+    wa "10th to 20th Fibonacci numbers"
+    wa "days from May 15 to July 30"
 
 On its first run, it will ask you for a WolframAlpha API key and point you to a URL where you can get one.
 
