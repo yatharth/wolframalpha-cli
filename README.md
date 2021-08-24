@@ -1,6 +1,10 @@
 # WolframAlpha CLI
 
-Simple command line tool to make WolframAlpha queries from the command line.
+Simple tool to make [WolframAlpha][] queries from the command line.
+
+![image](https://user-images.githubusercontent.com/1520684/130658442-dc952cfa-274b-4727-970f-625fb4aecbe7.png)
+
+[WolframAlpha]: https://www.wolframalpha.com
 
 
 ## Installation
@@ -11,9 +15,13 @@ To install from Homebrew, run:
 
 ---
 
-To download the script, just run:
+To just download the script, run:
 
     wget https://github.com/yatharth/wolframalpha-cli/raw/master/wa
+    chmod +x wa
+    mv wa /usr/local/bin 
+
+<!--
 
 If you don’t have `wget`, then you can use `curl` as so:
 
@@ -22,20 +30,23 @@ If you don’t have `wget`, then you can use `curl` as so:
 
 The different URL is because `curl` doesn’t follow the redirects Github sends back automatically. If you use `curl`, we do need to mark the file as executable with manually.
 
+-->
+
 
 ## Usage
 
 Just run:
 
-    wa "{your query here}"
+    wa "{your WolframAlpha query}"
 
 For example:
 
-	wa "2pm California to Brasil"
+    wa "2pm California to Brasil"
+    wa "time in Alberta"
+    wa 10th to 20th Fibonacci numbers
+    wa days from May 15 to July 30
 
-You don’t need the quotes. You can also do:
-
-    wa 2pm California to Brasil
+<!-- Quotemarks are optional. -->
 
 On its first run, it will ask you for a WolframAlpha API key and point you to a URL where you can get one.
 
@@ -49,7 +60,7 @@ To update, run:
 
 GitHub will create a new “release” for the tag, including a zip file and a gzipped tarball of the repo.
 
-We’ll need the URL of the tarball. It’ll be something like:
+The URL of the tarball will now be:
 
     https://github.com/yatharth/wolframalpha-cli/archive/refs/tags/{version}.tar.gz
 
@@ -73,11 +84,10 @@ sha_url https://github.com/yatharth/wolframalpha-cli/archive/refs/tags/{version}
 
 ---
 
-Then update the following fields in formula file in the [`yatharth/misc`][tap] tap:
+Then update the following fields in [`wolframalpha-cli.rb`][formula] formula file in the [`yatharth/misc`][tap] tap:
 
-- `version`
 - `url`
 - `sha256`
 
-
+[formula]: https://github.com/yatharth/homebrew-misc/blob/master/Formula/wolframalpha-cli.rb
 [tap]: https://github.com/yatharth/homebrew-misc
