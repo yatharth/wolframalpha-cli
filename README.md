@@ -45,6 +45,10 @@ For example:
     wa time in Alberta
     wa "10th to 20th Fibonacci numbers"
     wa "days from May 15 to July 30"
+    
+<!--
+    wa Sunday 3pm UK to here
+-->
 
 On its first run, it will ask you for a WolframAlpha API key and point you to a URL where you can get one.
 
