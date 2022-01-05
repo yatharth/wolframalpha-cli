@@ -11,7 +11,7 @@ Simple tool to make [WolframAlpha][] queries from the command line.
 
 To install from Homebrew, run:
 
-    brew install yatharth/misc/wolframalpha
+    brew install yatharth/misc/wolframalpha-cli
 
 ---
 
@@ -28,7 +28,7 @@ If you don’t have `wget`, then you can use `curl` as so:
     curl  https://raw.githubusercontent.com/yatharth/wolframalpha-cli/master/wa > wa
     chmod +x wa
 
-The different URL is because `curl` doesn’t follow the redirects Github sends back automatically. If you use `curl`, we do need to mark the file as executable with manually.
+The different URL is because `curl` doesn’t follow the redirects by default. If you use `curl`, we do need to mark the file as executable with manually.
 
 -->
 
